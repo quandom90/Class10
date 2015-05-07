@@ -19,7 +19,7 @@ public class YetiController : MonoBehaviour {
 		//reading key press or mouse input? DO IT HERE
 		//Reading Input.GetAcis? Here or FixedUpdate
 
-		if (!_jump) {
+		if ((!_jump) && (_grounded)) {
 			_jump = Input.GetButtonDown ("Fire1");
 		} 
 	}
@@ -33,11 +33,11 @@ public class YetiController : MonoBehaviour {
 	void FixedUpdate(){
 
 		if (_jump) {
-			_rigidBody.AddForce(new Vector2(0, 700));
+			_rigidBody.AddForce(new Vector2(0, 1000));
 			_animator.SetTrigger("Jumping");
 			_grounded = false;
 			_animator.SetBool("Grounded", false);
-			jump = false;
+			_jump = false;
 		}
 		var horizontal = Input.GetAxis ("Horizontal");
 		var vertical = Input.GetAxis ("Vertical");
@@ -54,6 +54,6 @@ public class YetiController : MonoBehaviour {
 			_animator.SetBool("Running", false);
 		}
 	     
-		_rigidBody.velocity = new Vector2 (horizontal * 6, _rigidBody.velocity.y);
+		_rigidBody.velocity = new Vector2 (horizontal * 10, _rigidBody.velocity.y);
 	}
 }
